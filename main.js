@@ -20,7 +20,7 @@ saveButton.addEventListener('click', function (event) {
     checkInputFields();
 });
 
-cardSection.addEventListener("click", deleteCard)
+cardSection.addEventListener("click", removeCard)
 //👇🏻 Global Variables
 
 var userIdeas = [];
@@ -88,7 +88,7 @@ function displayCard() {
                     <img class="active-star hidden" src="./assets/star-active.svg">
                 </button>
                 <button class="delete-button">
-                    <img class="inactive-delete" src="./assets/delete.svg">
+                    <img class="inactive-delete" id="${userIdeas[i].id}" src="./assets/delete.svg">
                     <img class="active-delete hidden" src="./assets/delete-active.svg">
                 </button>
             </div>
@@ -109,34 +109,21 @@ function displayCard() {
     disableButton()
 }
 
-
-function deleteCard(event) {
-    // console.log(event.target.className)
-    // removeCard(event)
+function removeCard(event) {
+    if(event.target.className === "inactive-delete") {
     for(var i = 0; i < userIdeas.length; i++) {
         if(Number(event.target.id) === userIdeas[i].id) {
-            console.log("hey ids match")
             userIdeas.splice(i, 1)
-         }
+            }
+        }
     }
-
-    if(event.target.classList.contains("inactive-delete")) {
-        
-        event.target.closest(".idea-card").remove()
-    }
-    
+    displayCard()
 }
 
-// function removeCard(event) {
-    // if(event.target.className === "inactive-delete")
-//     for(var i = 0; i < userIdeas.length; i++) {
-//         if(Number(event.target.id) === userIdeas[i].id) {
-//             console.log("hey ids match")
-//             userIdeas.splice(i, 1)
-//         }
-//     }
-//     displayCard()
-// }
+
+
+
+
 // -------Pseudocode----//
 // we want click the x 
 //find the id of that element 
